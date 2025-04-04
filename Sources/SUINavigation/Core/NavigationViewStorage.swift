@@ -65,11 +65,11 @@ public struct NavigationStorageView<Content: View>: View {
     }
 }
 
-#if DEBUG
+// #if DEBUG
     extension NavigationStorageView {
         public init(navigationStorage: NavigationStorage, @ViewBuilder content: () -> Content) {
             _navigationStorage = StateObject(wrappedValue: navigationStorage)
             self.content = content()
         }
     }
-#endif
+// #endif
