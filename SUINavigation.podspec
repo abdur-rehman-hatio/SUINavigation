@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
     tag: s.version
   }
   s.source_files = [
-     'Source/**/*.swift'
+     'Sources/**/*.swift'
   ]
 end
