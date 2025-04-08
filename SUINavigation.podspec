@@ -13,5 +13,7 @@ Pod::Spec.new do |s|
     git: 'https://github.com/ozontech/SUINavigation.git',
     tag: s.version
   }
-  s.source_files = 'Sources/*.swift'
+  s.source_files = [
+     'Source/**/*.swift'
+  ]
 end
