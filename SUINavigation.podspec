@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.authors     = { 'Ozon Tech' => 'https://ozon.tech/' }
 
   s.swift_version = '5.7'
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '14.0'
 
   s.source = {
     git: 'https://github.com/ozontech/SUINavigation.git',
