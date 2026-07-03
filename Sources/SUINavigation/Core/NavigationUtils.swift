@@ -39,7 +39,16 @@ public enum NavigationUtils {
     }
 
     public static func rootController() -> UIViewController? {
-        firstKeyWindow?.rootViewController
+        guard var topController = firstKeyWindow?.rootViewController else {
+            return nil
+        }
+        // Follow modal presentations (e.g. a host app presenting the SDK's
+        // UIHostingController via `.present(...)`) down to the deepest one,
+        // since `.presentedViewController` is not part of `.children`.
+        while let presented = topController.presentedViewController {
+            topController = presented
+        }
+        return topController
     }
 
     public static func findController<T: UIViewController>(viewController: UIViewController?) -> T? {
@@ -47,12 +56,19 @@ public enum NavigationUtils {
             return nil
         }
 
-        if let tabBarController = viewController as? T {
-            return tabBarController
+        if let matched = viewController as? T {
+            return matched
         }
 
         for childViewController in viewController.children {
-            return findController(viewController: childViewController)
+            if let found: T = findController(viewController: childViewController) {
+                return found
+            }
+        }
+
+        if let presented = viewController.presentedViewController,
+           let found: T = findController(viewController: presented) {
+            return found
         }
 
         return nil
